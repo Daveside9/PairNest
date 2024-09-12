@@ -1,0 +1,142 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* White background */
+    color: #333; /* Dark gray text */
+}
+
+/* Header styles */
+header {
+    background-color: #ff4b4b; /* Red background */
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+/* Container styles */
+.container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Button styles */
+.btn {
+    background-color: #ff4b4b; /* Red button */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #ff6b6b; /* Lighter red on hover */
+}
+
+/* Input field styles */
+form input[type="text"],
+form input[type="password"],
+form input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form label {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Form submit button */
+form button[type="submit"] {
+    background-color: #ff4b4b; /* Red submit button */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: #ff6b6b; /* Lighter red on hover */
+}
+
+/* Links */
+a {
+    color: #ff4b4b;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Profile listing styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+/* Individual profile page */
+.profile-container {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    width: 50%;
+    text-align: left;
+}
+
+.profile-container p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="number"] {
+        padding: 12px;
+    }
+
+    .profile-container {
+        width: 90%;
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Sign Up to PairNest</h1>
+</header>
+
+<div class="container">
+    <form action="/signup" method="POST">
+        <label for="username">fullname:</label>
+        <input type="text" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+
+        <label for="age">Age:</label>
+        <input type="number" name="age" required>
+
+        <label for="interest">Interest:</label>
+        <input type="text" name="interest" required>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account? <a href="{{ url_for('login') }}">Sign In</a></p>
+</div>
+
+</body>
+</html>
