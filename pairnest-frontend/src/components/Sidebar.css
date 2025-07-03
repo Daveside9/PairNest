@@ -1,0 +1,23 @@
+.sidebar {
+  @apply w-64 h-screen bg-slate-900 text-white p-6;
+}
+
+.logo {
+  @apply text-xl font-bold mb-8;
+}
+
+.nav-list {
+  @apply flex flex-col gap-4;
+}
+
+.nav-list li {
+  @apply cursor-pointer hover:text-purple-400 transition capitalize;
+}
+
+.nav-list li.active {
+  @apply text-purple-500 font-semibold;
+}
+
+.theme-toggle {
+  @apply mt-auto pt-8 text-sm text-gray-400;
+}

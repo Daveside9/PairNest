@@ -1,0 +1,119 @@
+/* ============ Theme Variables ============ */
+:root {
+  --bg-color: #f7f2f7;
+  --text-color: #333;
+  --card-bg: #fff;
+  --btn-bg: #007bff;
+  --btn-hover: #0056b3;
+  --border-color: #ccc;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1e1e1e;
+  --text-color: #eee;
+  --card-bg: #2a2a2a;
+  --btn-bg: #4e8cff;
+  --btn-hover: #3765b3;
+  --border-color: #444;
+}
+
+/* ============ Global Styles ============ */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ============ Reusable Form Styles ============ */
+.input-group {
+  margin-bottom: 1.2rem;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--btn-bg);
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: var(--btn-hover);
+}
+
+/* ============ Responsive Enhancements ============ */
+@media (max-width: 600px) {
+  .input-field,
+  .submit-btn {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+}
+
+/* ============ Original React App Styles ============ */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(17, 4, 115);
+}
+
+.App-link {
+  color: #d60722;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

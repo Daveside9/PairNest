@@ -1,0 +1,43 @@
+/* interestPage.css */
+
+.interest-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b013e, #120318);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ⬇️ align to bottom */
+  align-items: center;
+  padding: 2rem;
+}
+
+.interest-form {
+  background: rgba(255, 255, 255, 0.1); /* frosted glass */
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+}
+
+.interest-page h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.interest-form label {
+  color: #fff;
+}
+
+.interest-form input {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.save-btn {
+  background-color: #fffdff;
+}
+
+.save-btn:hover {
+  background-color: #2509fa;
+}

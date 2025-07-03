@@ -1,0 +1,123 @@
+.admin-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 18px;
+}
+
+.card span {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+  color: var(--primary);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.data-table th {
+  background: var(--table-header);
+  font-weight: 600;
+}
+
+.data-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.status-badge {
+  padding: 0.4rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: white;
+  text-align: center;
+}
+
+.status-active {
+  background-color: #28a745;
+}
+
+.status-pending {
+  background-color: #ffc107;
+  color: black;
+}
+
+.status-blocked {
+  background-color: #dc3545;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .data-table {
+    font-size: 0.9rem;
+  }
+}
+
+/* Dark/Light mode variables */
+:root {
+  --bg: #fdfbff;
+  --text: #222;
+  --card-bg: #fff;
+  --table-header: #f1f1f1;
+  --primary: #7e22ce;
+}
+
+body.dark-mode {
+  --bg: #1f1f2e;
+  --text: #eee;
+  --card-bg: #2c2c3e;
+  --table-header: #3a3a4e;
+  --primary: #d946ef;
+}

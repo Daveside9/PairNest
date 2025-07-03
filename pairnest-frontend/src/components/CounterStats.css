@@ -1,0 +1,19 @@
+.counter-section {
+  background: #0f172a;
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+}
+
+.counter-box h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #a78bfa;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+}
+
+.counter-box p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #cbd5e1;
+}
