@@ -52,7 +52,7 @@ function DashboardPage() {
   return (
     <div className="dashboard">
       <aside className="sidebar">
-        <h2>🧠 NeuroPulse</h2>
+        <h2>🧠 Pairnest</h2>
 
         <div className="profile-section">
           {profilePic && (
@@ -84,7 +84,7 @@ function DashboardPage() {
 
       <main className="main-content">
         <NotificationBell />
-        <h1>Welcome to your Dashboard</h1>
+        <h1>Welcome to your love world</h1>
         <p>Select a section on the left to begin.</p>
       </main>
     </div>

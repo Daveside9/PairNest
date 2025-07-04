@@ -29,7 +29,7 @@ function ProfilePage() {
           }));
         }
       } catch (err) {
-        console.error('Error fetching profile:', err.message);
+        console.error('Error fetching profile:', err.response?.data || err.message);
       }
     }
 
@@ -44,6 +44,19 @@ function ProfilePage() {
     }));
   };
 
+  const validateProfile = () => {
+    const requiredFields = ['fullName', 'gender', 'age', 'profession', 'location', 'temperament', 'loveLanguage', 'tribe'];
+    for (const field of requiredFields) {
+      if (!profile[field]) {
+        return `Please fill in the "${field}" field.`;
+      }
+    }
+    if (isNaN(profile.age) || profile.age < 18 || profile.age > 100) {
+      return 'Age must be between 18 and 100.';
+    }
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) {
@@ -51,15 +64,22 @@ function ProfilePage() {
       return;
     }
 
+    const validationError = validateProfile();
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
     try {
       await axios.post(`http://localhost:5000/api/profile/${email}`, profile);
       alert('Profile saved successfully!');
-    } catch (err) {
-      console.error('Error saving profile:', err.message);
-      alert('Failed to save profile.');
-    }
-  };
-
+   } catch (err) {
+  if (err.response?.status === 404) {
+    console.log('No profile yet — user needs to fill it.');
+  } else {
+    console.error('Error fetching profile:', err.response?.data || err.message);
+  }
+}
+  }
   return (
     <motion.div
       className="profile-page"
@@ -69,18 +89,75 @@ function ProfilePage() {
     >
       <h2>Your Profile</h2>
       <form onSubmit={handleSubmit} className="profile-form">
-        {Object.entries(profile).map(([field, value]) => (
-          <div key={field} className="form-group">
-            <label>{field.charAt(0).toUpperCase() + field.slice(1)}</label>
-            <input
-              type={field === 'age' ? 'number' : 'text'}
-              name={field}
-              value={value}
-              onChange={handleChange}
-              required={field !== 'hobbies'} // hobbies is optional
-            />
-          </div>
-        ))}
+        <div className="form-group">
+          <label>Full Name</label>
+          <input type="text" name="fullName" value={profile.fullName} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Gender</label>
+          <select name="gender" value={profile.gender} onChange={handleChange} required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Age</label>
+          <input type="number" name="age" value={profile.age} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Profession</label>
+          <input type="text" name="profession" value={profile.profession} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Location</label>
+          <input type="text" name="location" value={profile.location} onChange={handleChange} required />
+        </div>
+
+        <div className="form-group">
+          <label>Temperament</label>
+          <select name="temperament" value={profile.temperament} onChange={handleChange} required>
+            <option value="">Select Temperament</option>
+            <option value="Choleric">Choleric</option>
+            <option value="Sanguine">Sanguine</option>
+            <option value="Melancholic">Melancholic</option>
+            <option value="Phlegmatic">Phlegmatic</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Love Language</label>
+          <select name="loveLanguage" value={profile.loveLanguage} onChange={handleChange} required>
+            <option value="">Select Love Language</option>
+            <option value="Words of Affirmation">Words of Affirmation</option>
+            <option value="Acts of Service">Acts of Service</option>
+            <option value="Receiving Gifts">Receiving Gifts</option>
+            <option value="Quality Time">Quality Time</option>
+            <option value="Physical Touch">Physical Touch</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Tribe</label>
+          <select name="tribe" value={profile.tribe} onChange={handleChange} required>
+            <option value="">Select Tribe</option>
+            <option value="Yoruba">Yoruba</option>
+            <option value="Igbo">Igbo</option>
+            <option value="Hausa">Hausa</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Hobbies</label>
+          <input type="text" name="hobbies" value={profile.hobbies} onChange={handleChange} />
+        </div>
+
         <button type="submit" className="save-btn">Save Profile</button>
       </form>
     </motion.div>

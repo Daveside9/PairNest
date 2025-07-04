@@ -12,7 +12,7 @@ import './App.css';
 
 function App() {
   const user = localStorage.getItem('loggedInUser');
-  const isAdmin = localStorage.getItem('isAdmin') === 'true'; // ✅ Define this
+  const isAdmin = localStorage.getItem('isAdmin') === 'true'; // ✅ ensures boolean check
 
   return (
     <Routes>
@@ -23,7 +23,10 @@ function App() {
       <Route path="/interest" element={user ? <InterestPage /> : <Navigate to="/auth" />} />
       <Route path="/concellor" element={user ? <ConcellorPage /> : <Navigate to="/auth" />} />
       <Route path="/settings" element={user ? <SettingsPage /> : <Navigate to="/auth" />} />
-      <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/" />} /> {/* ✅ Fixed */}
+
+      {/* ✅ Admin route protected */}
+      <Route path="/admin" element={user && isAdmin ? <AdminPage /> : <Navigate to="/" />} />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

@@ -1,123 +1,116 @@
-.admin-page {
+/* AdminPage.css */
+
+.admin-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #4f46e5, #7c3aed);
+  color: white;
   padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s, color 0.3s;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.admin-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.admin-header h1 {
+.admin-title {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.dashboard-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+  font-weight: bold;
   margin-bottom: 2rem;
 }
 
-.card {
-  background-color: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  text-align: center;
-  transition: transform 0.3s ease;
+.stat-grid {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.card:hover {
-  transform: translateY(-4px);
+.stat-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.card h3 {
+.stat-card h4 {
+  font-size: 0.9rem;
+  color: #d1d5db;
   margin-bottom: 0.5rem;
-  font-size: 18px;
 }
 
-.card span {
-  font-size: 24px;
+.stat-card p {
+  font-size: 1.5rem;
   font-weight: bold;
-  display: block;
-  color: var(--primary);
 }
 
-.data-table {
+.user-table {
   width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  margin-top: 1.5rem;
   border-collapse: collapse;
-  background-color: var(--card-bg);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border-radius: 8px;
   overflow: hidden;
 }
 
-.data-table th,
-.data-table td {
-  padding: 0.9rem 1rem;
+.user-table th,
+.user-table td {
+  padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.data-table th {
-  background: var(--table-header);
-  font-weight: 600;
+.user-table th {
+  color: #93c5fd;
 }
 
-.data-table tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.04);
-}
-
-.status-badge {
-  padding: 0.4rem 0.7rem;
-  border-radius: 20px;
+.user-table td button {
+  padding: 0.3rem 0.75rem;
+  margin: 0 0.25rem;
+  border: none;
+  border-radius: 0.5rem;
   font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background: #4ade80;
+  color: #1e3a8a;
+}
+
+.btn-ban {
+  background: #f87171;
   color: white;
-  text-align: center;
 }
 
-.status-active {
-  background-color: #28a745;
+.search-input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: 100%;
+  max-width: 300px;
 }
 
-.status-pending {
-  background-color: #ffc107;
-  color: black;
+.btn-ban {
+  background-color: #dc2626;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  margin-left: 6px;
+  cursor: pointer;
 }
 
-.status-blocked {
-  background-color: #dc3545;
+.btn-unban {
+  background-color: #16a34a;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  margin-left: 6px;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .dashboard-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .data-table {
-    font-size: 0.9rem;
-  }
+.btn-ban:hover {
+  background-color: #b91c1c;
 }
 
-/* Dark/Light mode variables */
-:root {
-  --bg: #fdfbff;
-  --text: #222;
-  --card-bg: #fff;
-  --table-header: #f1f1f1;
-  --primary: #7e22ce;
-}
-
-body.dark-mode {
-  --bg: #1f1f2e;
-  --text: #eee;
-  --card-bg: #2c2c3e;
-  --table-header: #3a3a4e;
-  --primary: #d946ef;
+.btn-unban:hover {
+  background-color: #15803d;
 }

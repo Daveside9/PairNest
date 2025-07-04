@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AuthPage.css';
@@ -10,28 +10,26 @@ function AuthPage() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = localStorage.getItem('loggedInUser');
-    if (user) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+
     try {
       const url = isSignup
         ? 'http://localhost:5000/api/auth/signup'
         : 'http://localhost:5000/api/auth/login';
+
       const res = await axios.post(url, { email, password });
       setMessage(res.data.message);
 
       if (!isSignup) {
-        localStorage.setItem('loggedInUser', email);
-        navigate('/dashboard');
+        localStorage.setItem('loggedInUser', res.data.user.email);
+        localStorage.setItem('isAdmin', res.data.user.isAdmin);
+
+        navigate(res.data.user.isAdmin ? '/admin' : '/dashboard');
       }
     } catch (err) {
+      console.error('Login error:', err);
       setMessage(err.response?.data?.message || 'An error occurred');
     }
   };
