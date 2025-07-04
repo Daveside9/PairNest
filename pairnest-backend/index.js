@@ -8,6 +8,8 @@ const profileRoutes = require('./routes/ProfileRoutes');
 const InterestRoutes = require('./routes/InterestRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const sessionMiddleware = require('./middleware/session');
+const AdminRoutes = require('./routes/AdminRoutes');
+const setUser = require('./middleware/setUser');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,6 +35,9 @@ app.use('/api/interest', InterestRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/uploads', express.static('uploads'));
 app.use(sessionMiddleware);
+app.use(setUser);
+app.use('/api/Admin', AdminRoutes);
+
 
 
 // Test route
