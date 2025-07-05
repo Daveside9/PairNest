@@ -1,107 +1,128 @@
-💖 PairNest – Where Hearts Meet Through Harmony
-PairNest is a smart matchmaking platform that connects individuals based on deeply personalized interest and characteristic preferences. Designed with security, intention, and romantic compatibility in mind, PairNest ensures that each match leads to meaningful connections.
+# 💕 Pairnest – Powered Matchmaking Platform
 
-🌟 Features
-🧠 Smart Matchmaking Engine
-Users set detailed preferences such as age range, location, profession, temperament, love language, religion, and more.
+Pairnest is a full-stack matchmaking web app that uses personality traits, interests, and biometric verification to pair compatible users. Designed as a portfolio project, it features a user-friendly experience, advanced admin dashboard, real-time updates, and secure data handling.
 
-The system intelligently pairs two users when a compatibility score of 80% or above is detected.
+---
 
-✅ Match Confirmation Flow
-When a compatible match is found:
+## ✨ Features
 
-Both users receive a match notification.
+### 👩‍❤️‍👨 User Side
+- ✅ Sign up / Login with email and password
+- ✅ Profile creation with:
+  - Full name, gender, age, temperament, love language, etc.
+- ✅ Interest selection & compatibility matching
+- ✅ Mutual match confirmation (≥80% compatibility)
+- ✅ Blind date booking (requires male partner payment)
+- ✅ Face & thumbprint verification during signup (simulated)
+- ✅ Notification inbox with admin messages
+- ✅ Mobile-friendly responsive UI
 
-They can either accept or decline the pairing.
+### 🧑‍💼 Admin Dashboard
+- ✅ View total users, matches, feedbacks (chart + stats)
+- ✅ Search/filter users
+- ✅ Ban / Unban users
+- ✅ Edit user data
+- ✅ View all bookings (with feedback/rating)
+- ✅ Send notifications to users
+- ✅ Real-time updates via WebSocket (e.g., user banned, new bookings)
 
-🗓️ Blind Date Booking
-Upon mutual acceptance, the male partner proceeds with a payment to confirm the match.
+---
 
-The PairNest team (admin) then books a blind date venue close to both users’ locations.
+## 📸 Screenshots
 
-🌐 Post-Date Feedback & Rating
-After the blind date, both users are prompted to:
+> Add your own screenshots here:
+📷 Dashboard overview
+📷 (image-1.png) Profile form
+📷 Admin banning user
+📷 Booking list
 
-Provide feedback.
+yaml
+Copy
+Edit
 
-Leave a rating to improve the platform's trust and matchmaking accuracy.
+---
 
-🔐 Biometric Security at Signup
-To prevent bot activity and fake accounts:
+## 🔧 Tech Stack
 
-Facial verification is required.
+### Frontend
+- React.js (with Hooks)
+- Axios
+- React Router
+- Framer Motion (animations)
+- CSS Modules / Custom Styles
 
-Thumbprint (tomb print) authentication ensures user identity integrity.
+### Backend
+- Node.js + Express.js
+- MongoDB + Mongoose
+- JSON Web Token (auth middleware)
+- Socket.io (real-time updates)
+- REST API with protected routes
 
-🛠️ Tech Stack
-Frontend
-React.js with react-router-dom
+---
 
-Axios for API communication
+## 🚀 Getting Started (Local Development)
 
-Framer Motion for smooth animations
+### 🖥 Backend
+```bash
+cd backend
+npm install
+# Create a .env file and add:
+# MONGO_URI=your_mongo_connection_string
+node index.js
+🌐 Frontend
+bash
+Copy
+Edit
+cd frontend
+npm install
+npm start
+The app runs at:
 
-Responsive design with dark/light theme support
+http://localhost:3000 (Frontend)
 
-Backend
-Node.js + Express.js
+http://localhost:5000 (Backend API)
 
-RESTful APIs with authentication and profile management
+🧪 Demo Credentials
+You can simulate with test accounts like:
 
-Secure user sessions via localStorage
+makefile
+Copy
+Edit
+User:
+Email: user@example.com
+Password: 123456
 
-File upload support (for profile pictures)
+Admin:
+Email: daveside00468@gmail.com
+Password: your_admin_password
+📦 Folder Structure
+bash
+Copy
+Edit
+/backend
+  /models
+  /routes
+  /middleware
+  index.js
 
-Future support planned for biometric APIs
+/frontend
+  /components
+  /pages
+  /utils
+  App.js
+📈 Future Improvements (Optional)
+Live video verification using face-api.js
 
-🔐 Security & Verification
-Account registration requires:
+Email & push notifications
 
-Valid email and password
+Infinite scroll / pagination in admin panel
 
-Live facial scan (AI camera integration planned)
+Analytics dashboard with D3.js or Chart.js
 
-Thumbprint verification (biometric hardware or app scanner integration)
+👨‍💻 Author
+David Joel – GitHub
+Feel free to fork, star, and follow my journey!
 
-All user data is stored securely following best practices
-
-🧪 Future Enhancements
-Real-time chat and messaging between matched users
-
-AI-based date recommendations based on feedback
-
-Admin dashboard for booking management and user moderation
-
-Integration with payment gateways for secure transactions
-
-Enhanced fraud detection with facial movement analysis
-
-📸 Demo Screenshots
-Coming soon...
-
-🚀 Getting Started (Developer Mode)
-Clone the repo:
-git clone https://github.com/your-username/pairnest.git
-
-Install frontend dependencies:
-cd frontend && npm install
-
-Install backend dependencies:
-cd backend && npm install
-
-Start backend server:
-cd backend && npm run dev
-
-Start frontend app:
-cd frontend && npm start
-
-🤝 Contributing
-Want to help build love tech? PRs are welcome. Please fork the repo and submit your pull requests to dev branch.
-
-📬 Contact
-Email: support@pairnest.com
-
-Twitter: @pairnestlove
-
-Website: https://pairnest.com
-
+📝 License
+This project is for educational and portfolio use only.
+Not intended for commercial deployment.
