@@ -16,22 +16,29 @@ const setUser = require('./middleware/setUser');
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: '*', // ✅ Allow all origins for production (or set your frontend URL)
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  },
-});
+// ✅ CORS options: allow local + deployed frontend
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',                         // local frontend
+    'https://your-frontend-url.onrender.com'         // replace with your actual frontend URL on Render
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+};
 
-app.set('io', io); // ✅ WebSocket available in routes
-
-// Middleware
-app.use(cors());
+app.use(cors(corsOptions)); // ✅ Use proper CORS settings
 app.use(express.json());
 app.use(sessionMiddleware);
 app.use(setUser);
 
-// MongoDB connection
+// ✅ WebSocket server with same CORS
+const io = new Server(server, {
+  cors: corsOptions
+});
+
+app.set('io', io); // ✅ Make io available in all routes
+
+// ✅ MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -41,20 +48,20 @@ mongoose.connect(process.env.MONGO_URI, {
   console.error('❌ MongoDB connection error:', err);
 });
 
-// API routes
+// ✅ API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/interest', InterestRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/uploads', express.static('uploads'));
-app.use('/api/admin', AdminRoutes); // ⚠️ lowercase 'admin' for consistency
+app.use('/api/admin', AdminRoutes); // ⚠️ lowercase for consistent API path
 
-// Test route
+// ✅ Root route
 app.get('/', (req, res) => {
   res.send('🌐 Pairnest backend is running...');
 });
 
-// WebSocket events
+// ✅ WebSocket events
 io.on('connection', (socket) => {
   console.log('🟢 WebSocket connected:', socket.id);
 
@@ -63,7 +70,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// Start server
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
