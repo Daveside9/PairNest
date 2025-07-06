@@ -14,16 +14,16 @@ const AdminRoutes = require('./routes/AdminRoutes');
 const setUser = require('./middleware/setUser');
 
 const app = express();
-const server = http.createServer(app); // ✅ Create HTTP server
+const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000', // Change this if deploying
+    origin: '*', // ✅ Allow all origins for production (or set your frontend URL)
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  }
+  },
 });
 
-// ✅ Make `io` available in routes (e.g. for broadcasting updates)
-app.set('io', io);
+app.set('io', io); // ✅ WebSocket available in routes
 
 // Middleware
 app.use(cors());
@@ -34,33 +34,32 @@ app.use(setUser);
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 }).then(() => {
   console.log('✅ Connected to MongoDB');
 }).catch((err) => {
   console.error('❌ MongoDB connection error:', err);
 });
 
-// Routes
+// API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/interest', InterestRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/uploads', express.static('uploads'));
-app.use('/api/Admin', AdminRoutes);
-app.set('io', io); // ✅ makes `io` available in all routes
+app.use('/api/admin', AdminRoutes); // ⚠️ lowercase 'admin' for consistency
 
-// Root route
+// Test route
 app.get('/', (req, res) => {
-  res.send('Server is running...');
+  res.send('🌐 Pairnest backend is running...');
 });
 
-// ✅ Setup WebSocket connection
+// WebSocket events
 io.on('connection', (socket) => {
-  console.log('🟢 New client connected:', socket.id);
+  console.log('🟢 WebSocket connected:', socket.id);
 
   socket.on('disconnect', () => {
-    console.log('🔴 Client disconnected:', socket.id);
+    console.log('🔴 WebSocket disconnected:', socket.id);
   });
 });
 
