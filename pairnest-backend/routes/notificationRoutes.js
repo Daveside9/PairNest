@@ -1,19 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const Notification = require('../models/Notification');
-const User = require('../models/User');
 
-// GET /api/notifications/:email → fetch notifications for a user
-router.get('/:email', async (req, res) => {
+// GET notifications for a user
+router.get('/:userId', async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.params.email });
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    const notifications = await Notification.find({ user: user._id }).sort({ createdAt: -1 });
+    const notifications = await Notification.find({ user: req.params.userId }).sort({ createdAt: -1 });
     res.json(notifications);
   } catch (err) {
-    console.error('Error fetching notifications:', err);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Error fetching notifications', error: err.message });
+  }
+});
+
+// Mark as read
+router.put('/:id/read', async (req, res) => {
+  try {
+    const notification = await Notification.findByIdAndUpdate(req.params.id, { read: true }, { new: true });
+    res.json(notification);
+  } catch (err) {
+    res.status(500).json({ message: 'Error updating notification', error: err.message });
   }
 });
 
