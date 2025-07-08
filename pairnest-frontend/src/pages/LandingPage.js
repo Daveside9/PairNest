@@ -19,11 +19,11 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-left">
-          <h1>This is where hearts meet through harmony.</h1>
-          <p>PairNest: Your heart's new favorite algorithm.</p>
+          <h1>This is where hearts meet in a million ways.</h1>
+          <p>PairNest: You can zink too.</p>
           <div className="cta-buttons">
             <button className="primary-btn" onClick={handleMeetPairClick}>
-              Meet a Pair
+              Connect
             </button>
           </div>
         </div>
@@ -54,7 +54,7 @@ const LandingPage = () => {
           </div>
           <div className="card">
             <span role="img" aria-label="community">🌍</span>
-            <h3>Tribe Connect</h3>
+            <h3>No distance barriers</h3>
           </div>
         </div>
       </section>

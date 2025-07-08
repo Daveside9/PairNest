@@ -10,29 +10,30 @@ function AuthPage() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setMessage('');
 
-    try {
-      const url = isSignup
-        ? 'http://localhost:5000/api/auth/signup'
-        : 'http://localhost:5000/api/auth/login';
+  try {
+    const url = isSignup
+      ? `${process.env.REACT_APP_API_URL}/api/auth/signup`
+      : `${process.env.REACT_APP_API_URL}/api/auth/login`;
 
-      const res = await axios.post(url, { email, password });
-      setMessage(res.data.message);
+    // ✅ Place the axios POST call here
+    const res = await axios.post(url, { email, password });
 
-      if (!isSignup) {
-        localStorage.setItem('loggedInUser', res.data.user.email);
-        localStorage.setItem('isAdmin', res.data.user.isAdmin);
+    setMessage(res.data.message);
 
-        navigate(res.data.user.isAdmin ? '/admin' : '/dashboard');
-      }
-    } catch (err) {
-      console.error('Login error:', err);
-      setMessage(err.response?.data?.message || 'An error occurred');
+    if (!isSignup) {
+      localStorage.setItem('loggedInUser', res.data.user.email);
+      localStorage.setItem('isAdmin', res.data.user.isAdmin);
+      navigate(res.data.user.isAdmin ? '/admin' : '/dashboard');
     }
-  };
+  } catch (err) {
+    console.error('Login error:', err);
+    setMessage(err.response?.data?.message || 'An error occurred');
+  }
+};
 
   return (
     <div className="auth-page">

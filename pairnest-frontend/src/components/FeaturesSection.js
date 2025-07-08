@@ -6,7 +6,7 @@ const features = [
   { icon: <FaHeart />, title: "Smart Matchmaking" },
   { icon: <FaMagic />, title: "Love Language Decoder" },
   { icon: <FaRocket />, title: "Growth Tracker" },
-  { icon: <FaUsers />, title: "Tribe Connect" },
+  { icon: <FaUsers />, title: "Desired Pertner" },
 ];
 
 const FeaturesSection = () => {

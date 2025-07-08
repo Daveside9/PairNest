@@ -3,7 +3,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import './NotificationInbox.css';
 
-const socket = io('http://localhost:5000');
+const socket = io(process.env.REACT_APP_API_URL); // ✅ use .env-based backend URL
 
 function NotificationInbox({ userId }) {
   const [notifications, setNotifications] = useState([]);
@@ -11,8 +11,12 @@ function NotificationInbox({ userId }) {
   useEffect(() => {
     // Fetch existing notifications
     const fetchNotifications = async () => {
-      const res = await axios.get(`http://localhost:5000/api/notifications/${userId}`);
-      setNotifications(res.data);
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/notifications/${userId}`);
+        setNotifications(res.data);
+      } catch (error) {
+        console.error('Error fetching notifications:', error);
+      }
     };
     fetchNotifications();
 
@@ -27,10 +31,14 @@ function NotificationInbox({ userId }) {
   }, [userId]);
 
   const markAsRead = async (id) => {
-    await axios.put(`http://localhost:5000/api/notifications/${id}/read`);
-    setNotifications(prev =>
-      prev.map(n => (n._id === id ? { ...n, read: true } : n))
-    );
+    try {
+      await axios.patch(`${process.env.REACT_APP_API_URL}/api/notifications/${id}/read`);
+      setNotifications(prev =>
+        prev.map(n => (n._id === id ? { ...n, read: true } : n))
+      );
+    } catch (error) {
+      console.error('Error marking notification as read:', error);
+    }
   };
 
   return (
@@ -46,7 +54,8 @@ function NotificationInbox({ userId }) {
               className={n.read ? 'read' : 'unread'}
               onClick={() => markAsRead(n._id)}
             >
-              {n.message} <span>{new Date(n.createdAt).toLocaleString()}</span>
+              {n.message}{' '}
+              <span>{new Date(n.createdAt).toLocaleString()}</span>
             </li>
           ))}
         </ul>

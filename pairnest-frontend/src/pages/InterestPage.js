@@ -31,7 +31,7 @@ const InterestPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/interest', { email, ...preferences });
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/interest`, { email, ...preferences });
       alert("Preferences saved successfully!");
     } catch (error) {
       console.error(error);

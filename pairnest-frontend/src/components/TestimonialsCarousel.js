@@ -2,8 +2,8 @@ import React from 'react';
 import './TestimonialsCarousel.css';
 
 const testimonials = [
-  { text: "I found my soulmate on PairNest in just 2 weeks!", user: "— Ada, Lagos" },
-  { text: "The temperament matching is scarily accurate.", user: "— Chinedu, Abuja" },
+  { text: "I found my soulmate on PairNest in just 2 weeks!", user: "— Ada, kaduna" },
+  { text: "The temperament matching is scarily accurate.", user: "— Chinedu, kaduna" },
   { text: "We got married last year, all thanks to PairNest!", user: "— Tola & Grace" },
 ];
 

@@ -1,43 +1,102 @@
+/* AuthPage.css */
+
 .auth-page {
-  @apply h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #2a0cd0, #f247ed);
+  padding: 1rem;
 }
 
 .auth-card {
-  @apply bg-white/10 backdrop-blur-md rounded-2xl p-8 w-full max-w-md border border-purple-500 shadow-lg;
+  background: rgba(245, 245, 247, 0.311);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgb(228, 27, 124);
 }
 
 .auth-title {
-  @apply text-white text-2xl font-semibold mb-6 text-center;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .auth-input {
-  @apply w-full px-4 py-2 mb-4 rounded-lg bg-slate-800 text-white border border-slate-700 placeholder-gray-400;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #1d2ae7;
+  font-size: 1rem;
 }
 
 .auth-btn {
-  @apply w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 rounded-lg transition;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #e405bf;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  background-color: #ee1fc5;
 }
 
 .divider {
-  @apply text-center text-white my-4;
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #f6f3f3;
 }
 
 .social-login {
-  @apply flex flex-col gap-2;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .social-btn {
-  @apply w-full py-2 rounded-lg font-medium;
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: not-allowed;
 }
 
-.social-btn.google {
-  @apply bg-red-500 hover:bg-red-600 text-white;
+.toggle-text {
+  text-align: center;
+  margin-top: 1rem;
 }
 
-.social-btn.github {
-  @apply bg-gray-800 hover:bg-gray-900 text-white;
+.toggle-link {
+  color: #f621c1;
+  cursor: pointer;
 }
 
-.biometric-toggle {
-  @apply flex items-center gap-2 text-sm text-gray-300 mb-4;
+/* ✅ Responsive */
+@media (max-width: 500px) {
+  .auth-card {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+
+  .auth-title {
+    font-size: 1.25rem;
+  }
+
+  .auth-input,
+  .auth-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .social-login {
+    flex-direction: column;
+  }
 }

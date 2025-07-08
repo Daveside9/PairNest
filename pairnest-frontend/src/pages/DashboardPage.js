@@ -14,7 +14,7 @@ function DashboardPage() {
     async function fetchProfile() {
       if (!email) return;
       try {
-        const res = await axios.get(`http://localhost:5000/api/auth/profile/${email}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/auth/profile/${email}`);
         if (res.data) {
           setUserId(res.data._id || '');
           setProfilePic(res.data.profilePic || '');

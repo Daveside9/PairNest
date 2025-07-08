@@ -1,17 +1,17 @@
-/* ProfilePage.css */
+/* profilePage.css */
 
 .profile-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0b013e, #120318);
+  background: linear-gradient(135deg, #1e00b4, #e924cc);
   display: flex;
   flex-direction: column;
-  justify-content: center; /* ⬇️ align to bottom */
+  justify-content: center;
   align-items: center;
   padding: 2rem;
 }
 
 .profile-form {
-  background: rgba(255, 255, 255, 0.1); /* frosted glass */
+  background: rgb(255, 255, 255);
   backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 12px;
@@ -22,22 +22,46 @@
 
 .profile-page h2 {
   text-align: center;
-  color: #ffffff;
+  color: #f92b2b;
   margin-bottom: 1.5rem;
 }
 
 .profile-form label {
-  color: #fff;
+  color: #f5f6f9;
+  display: block;
+  margin-bottom: 0.3rem;
 }
 
 .profile-form input {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(232, 232, 239, 0.8);
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: none;
 }
 
 .save-btn {
-  background-color: #fffdff;
+  background-color: #3044f8;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
 }
 
 .save-btn:hover {
-  background-color: #2509fa;
+  background-color: #672dfb;
+  color: rgb(34, 87, 247);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .profile-form {
+    padding: 1rem;
+  }
+
+  .profile-page h2 {
+    font-size: 1.5rem;
+  }
 }

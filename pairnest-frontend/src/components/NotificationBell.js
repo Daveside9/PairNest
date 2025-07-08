@@ -5,26 +5,40 @@ function NotificationBell({ userId }) {
   const [notifications, setNotifications] = useState([]);
   const [showList, setShowList] = useState(false);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const fetchNotifications = async () => {
-    const res = await axios.get(`http://localhost:5000/api/notifications/${userId}`);
-    setNotifications(res.data);
+    try {
+      const res = await axios.get(`${API_URL}/api/notifications/${userId}`);
+      setNotifications(res.data);
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+    }
   };
 
   const markAsRead = async (id) => {
-    await axios.patch(`http://localhost:5000/api/notifications/${id}/read`);
-    fetchNotifications();
+    try {
+      await axios.patch(`${API_URL}/api/notifications/${id}/read`);
+      fetchNotifications();
+    } catch (error) {
+      console.error('Error marking as read:', error);
+    }
   };
 
   const deleteNotification = async (id) => {
-    await axios.delete(`http://localhost:5000/api/notifications/${id}`);
-    fetchNotifications();
+    try {
+      await axios.delete(`${API_URL}/api/notifications/${id}`);
+      fetchNotifications();
+    } catch (error) {
+      console.error('Error deleting notification:', error);
+    }
   };
 
   useEffect(() => {
     fetchNotifications();
   }, []);
 
-  const unreadCount = notifications.filter(n => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <div className="relative">
@@ -37,14 +51,29 @@ function NotificationBell({ userId }) {
           {notifications.length === 0 ? (
             <p className="text-sm text-gray-500">No notifications</p>
           ) : (
-            notifications.map(note => (
-              <div key={note._id} className={`p-2 mb-1 border rounded ${note.read ? 'bg-gray-100' : 'bg-yellow-100'}`}>
+            notifications.map((note) => (
+              <div
+                key={note._id}
+                className={`p-2 mb-1 border rounded ${
+                  note.read ? 'bg-gray-100' : 'bg-yellow-100'
+                }`}
+              >
                 <p className="text-sm">{note.message}</p>
                 <div className="flex gap-2 text-xs mt-1">
                   {!note.read && (
-                    <button onClick={() => markAsRead(note._id)} className="text-blue-500">Mark as read</button>
+                    <button
+                      onClick={() => markAsRead(note._id)}
+                      className="text-blue-500"
+                    >
+                      Mark as read
+                    </button>
                   )}
-                  <button onClick={() => deleteNotification(note._id)} className="text-red-500">Delete</button>
+                  <button
+                    onClick={() => deleteNotification(note._id)}
+                    className="text-red-500"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))

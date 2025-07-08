@@ -22,7 +22,7 @@ const ConcellorPage = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/concellor', form);
+      await axios.post('${process.env.REACT_APP_API_BASE_URL}/api/concellor', form);
       alert("Your message was sent to our counselor. Thank you!");
       setForm({ ...form, message: '' });
     } catch (err) {

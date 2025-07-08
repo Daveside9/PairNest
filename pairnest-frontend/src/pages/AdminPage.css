@@ -2,8 +2,8 @@
 
 .admin-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #4f46e5, #7c3aed);
-  color: white;
+  background: linear-gradient(135deg, hsl(240, 13%, 88%), #119795, #fbf7fa);
+  color: rgb(34, 17, 229);
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -12,16 +12,19 @@
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .stat-grid {
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .stat-card {
   flex: 1;
+  min-width: 200px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   padding: 1rem;
@@ -29,8 +32,8 @@
 }
 
 .stat-card h4 {
-  font-size: 0.9rem;
-  color: #d1d5db;
+  font-size: 0.2rem;
+  color: #c50909;
   margin-bottom: 0.5rem;
 }
 
@@ -39,9 +42,10 @@
   font-weight: bold;
 }
 
+/* Table styling */
 .user-table {
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(9, 16, 217, 0);
   border-radius: 0.75rem;
   margin-top: 1.5rem;
   border-collapse: collapse;
@@ -52,11 +56,16 @@
 .user-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgb(242, 15, 212);
 }
 
 .user-table th {
-  color: #93c5fd;
+  color: #0b13f43d;
+  font-size: 0.9rem;
+}
+
+.user-table td {
+  font-size: 0.85rem;
 }
 
 .user-table td button {
@@ -69,22 +78,8 @@
 }
 
 .btn-edit {
-  background: #4ade80;
-  color: #1e3a8a;
-}
-
-.btn-ban {
-  background: #f87171;
-  color: white;
-}
-
-.search-input {
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 0.5rem;
-  border: none;
-  width: 100%;
-  max-width: 300px;
+  background: #3c0dd8;
+  color: #f1f2f5;
 }
 
 .btn-ban {
@@ -97,8 +92,12 @@
   cursor: pointer;
 }
 
+.btn-ban:hover {
+  background-color: #b91c1c;
+}
+
 .btn-unban {
-  background-color: #16a34a;
+  background-color: #ff1d1d;
   color: white;
   padding: 5px 10px;
   border: none;
@@ -107,10 +106,52 @@
   cursor: pointer;
 }
 
-.btn-ban:hover {
-  background-color: #b91c1c;
+.btn-unban:hover {
+  background-color: #040414;
 }
 
-.btn-unban:hover {
-  background-color: #15803d;
+.search-input {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .stat-grid {
+    flex-direction: column;
+  }
+
+  .admin-title {
+    font-size: 1.5rem;
+  }
+
+  .user-table {
+    font-size: 0.85rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 0.5rem 1rem;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .stat-card {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 }

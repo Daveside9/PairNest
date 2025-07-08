@@ -21,7 +21,7 @@ function ProfilePage() {
     async function fetchProfile() {
       if (!email) return;
       try {
-        const res = await axios.get(`http://localhost:5000/api/profile/${email}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/profile/${email}`)
         if (res.data) {
           setProfile((prev) => ({
             ...prev,
@@ -70,7 +70,7 @@ function ProfilePage() {
       return;
     }
     try {
-      await axios.post(`http://localhost:5000/api/profile/${email}`, profile);
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/profile/${email}`, profile);
       alert('Profile saved successfully!');
    } catch (err) {
   if (err.response?.status === 404) {

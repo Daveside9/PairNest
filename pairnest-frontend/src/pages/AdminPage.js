@@ -4,6 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { io } from 'socket.io-client';
 import './AdminPage.css';
 
+const API = process.env.REACT_APP_API_URL; // ✅ Use env variable (e.g., https://pairnest.onrender.com)
+
 const AdminPage = () => {
   const [stats, setStats] = useState({});
   const [users, setUsers] = useState([]);
@@ -21,9 +23,9 @@ const AdminPage = () => {
     const fetchData = async () => {
       try {
         const [statsRes, usersRes, bookingsRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/admin/stats', { headers: { 'x-user-email': loggedInAdminEmail } }),
-          axios.get('http://localhost:5000/api/admin/users', { headers: { 'x-user-email': loggedInAdminEmail } }),
-          axios.get('http://localhost:5000/api/admin/bookings', { headers: { 'x-user-email': loggedInAdminEmail } }),
+          axios.get(`${API}/api/admin/stats`, { headers: { 'x-user-email': loggedInAdminEmail } }),
+          axios.get(`${API}/api/admin/users`, { headers: { 'x-user-email': loggedInAdminEmail } }),
+          axios.get(`${API}/api/admin/bookings`, { headers: { 'x-user-email': loggedInAdminEmail } }),
         ]);
         setStats(statsRes.data);
         setUsers(usersRes.data);
@@ -48,7 +50,7 @@ const AdminPage = () => {
   const handleBanToggle = async (user) => {
     const endpoint = user.banned ? 'unban' : 'ban';
     try {
-      const res = await axios.put(`http://localhost:5000/api/admin/${endpoint}/${user._id}`, {}, {
+      const res = await axios.put(`${API}/api/admin/${endpoint}/${user._id}`, {}, {
         headers: { 'x-user-email': loggedInAdminEmail }
       });
       setUsers(prev => prev.map(u => u._id === user._id ? { ...u, banned: !user.banned } : u));
@@ -59,7 +61,7 @@ const AdminPage = () => {
 
   const handleEditSubmit = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/admin/edit/${editingUser._id}`, editingUser, {
+      const res = await axios.put(`${API}/api/admin/edit/${editingUser._id}`, editingUser, {
         headers: { 'x-user-email': loggedInAdminEmail }
       });
       alert('User updated!');
@@ -70,28 +72,27 @@ const AdminPage = () => {
     }
   };
 
-useEffect(() => {
-  const socket = io('http://localhost:5000');
+  useEffect(() => {
+    const socket = io(API); // ✅ Use backend URL for socket too
 
-  socket.on('userUpdated', updatedUser => {
-    setUsers(prev =>
-      prev.map(u => (u._id === updatedUser._id ? updatedUser : u))
-    );
-  });
+    socket.on('userUpdated', updatedUser => {
+      setUsers(prev =>
+        prev.map(u => (u._id === updatedUser._id ? updatedUser : u))
+      );
+    });
 
-  socket.on('bookingCreated', newBooking => {
-    setBookings(prev => [newBooking, ...prev]);
-  });
+    socket.on('bookingCreated', newBooking => {
+      setBookings(prev => [newBooking, ...prev]);
+    });
 
-  socket.on('notification', notif => {
-    console.log('🔔 New notification:', notif);
-    // Optional: Show toast or highlight
-  });
+    socket.on('notification', notif => {
+      console.log('🔔 New notification:', notif);
+    });
 
-  return () => {
-    socket.disconnect();
-  };
-}, []);
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const exportToCSV = () => {
     const csvRows = [
@@ -110,7 +111,7 @@ useEffect(() => {
   const handleSendNotification = async () => {
     if (!selectedUserId || !notificationMsg) return;
     try {
-      await axios.post(`http://localhost:5000/api/admin/notify/${selectedUserId}`, { message: notificationMsg }, {
+      await axios.post(`${API}/api/admin/notify/${selectedUserId}`, { message: notificationMsg }, {
         headers: { 'x-user-email': loggedInAdminEmail }
       });
       alert('Notification sent!');

@@ -18,16 +18,24 @@
 }
 
 /* ============ Global Styles ============ */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  line-height: 1.6;
 }
 
 /* ============ Reusable Form Styles ============ */
 .input-group {
   margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-label {
@@ -45,6 +53,12 @@ body {
   font-size: 16px;
   background-color: var(--card-bg);
   color: var(--text-color);
+  transition: border 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: var(--btn-bg);
+  outline: none;
 }
 
 .submit-btn {
@@ -56,6 +70,7 @@ body {
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submit-btn:hover {
@@ -63,18 +78,35 @@ body {
 }
 
 /* ============ Responsive Enhancements ============ */
-@media (max-width: 600px) {
-  .input-field,
-  .submit-btn {
-    font-size: 14px;
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
   }
 
-  h2 {
-    font-size: 20px;
+  h1, h2, h3 {
+    font-size: 1.5rem;
+  }
+
+  .input-field {
+    font-size: 15px;
+  }
+
+  .submit-btn {
+    font-size: 15px;
   }
 
   .input-group {
-    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .submit-btn {
+    padding: 0.7rem;
   }
 }
 
