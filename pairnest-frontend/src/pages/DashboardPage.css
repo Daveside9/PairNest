@@ -3,6 +3,10 @@
   min-height: 100vh;
   background-color: #b8cdf8;
   color: rgb(28, 13, 233);
+  background: url('https://cdn.pixabay.com/photo/2024/07/10/20/13/ai-generated-8886602_1280.jpg') 
+  no-repeat center center / cover;
+  background-attachment: fixed;
+  overflow-x: hidden;
   flex-direction: row;
 }
 
