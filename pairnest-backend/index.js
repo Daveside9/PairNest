@@ -4,7 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 const http = require('http');
 const { Server } = require('socket.io');
-const path = require('path'); // ✅ ADD THIS
+const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/ProfileRoutes');
@@ -19,7 +19,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: '*', // ✅ Update this to your frontend domain in production
+    origin: '*', // ✅ In production, replace with your frontend domain
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 });
@@ -48,19 +48,9 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/interest', InterestRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/uploads', express.static('uploads'));
-app.use('/api/admin', AdminRoutes); // ⚠️ lowercase 'admin' for consistency
+app.use('/api/admin', AdminRoutes);
 
-// ✅ Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, 'client', 'build');
-  app.use(express.static(frontendPath));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-  });
-}
-
-// Test route (optional if you're serving frontend separately)
+// Basic test route
 app.get('/', (req, res) => {
   res.send('🌐 Pairnest backend is running...');
 });
