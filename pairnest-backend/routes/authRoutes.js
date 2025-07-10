@@ -4,10 +4,9 @@ const multer = require('multer');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
+const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
 
-// For Google Sign-In
-const { OAuth2Client } = require('google-auth-library');
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // Multer config
@@ -21,13 +20,78 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-/** ---------- EXISTING ROUTES STAY UNCHANGED ---------- **/
+/**
+ * @route   POST /api/auth/signup
+ */
+router.post('/signup', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const exists = await User.findOne({ email });
+    if (exists) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
-// ... your /signup, /login, /upload-profile-pic/:id, /profile/:email routes ...
+    const newUser = await User.create({ email, password });
+    res.status(201).json({ message: 'User created successfully' });
+  } catch (err) {
+    console.error('Signup Error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+/**
+ * @route   POST /api/auth/login
+ */
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user || !(await user.matchPassword(password))) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    res.status(200).json({
+      message: 'Login successful',
+      user: {
+        email: user.email,
+        isAdmin: user.isAdmin,
+      }
+    });
+  } catch (err) {
+    console.error('Login Error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+/**
+ * @route   POST /api/auth/upload-profile-pic/:id
+ */
+router.post('/upload-profile-pic/:id', upload.single('profilePic'), async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      profilePic: `http://localhost:5000/uploads/${req.file.filename}`
+    }, { new: true });
+
+    res.json({ message: 'Profile picture updated', profilePic: user.profilePic });
+  } catch (err) {
+    res.status(500).json({ message: 'Upload failed', error: err.message });
+  }
+});
+
+/**
+ * @route   GET /api/auth/profile/:email
+ */
+router.get('/profile/:email', async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email });
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Profile fetch failed' });
+  }
+});
 
 /**
  * @route   POST /api/auth/google
- * @desc    Login or register user using Google token
  */
 router.post('/google', async (req, res) => {
   const { token } = req.body;
@@ -44,7 +108,10 @@ router.post('/google', async (req, res) => {
     let user = await User.findOne({ email });
 
     if (!user) {
-      user = await User.create({ email, password: Math.random().toString(36) }); // random password
+      user = await User.create({
+        email,
+        password: Math.random().toString(36).slice(-8) // triggers hashing
+      });
     }
 
     res.status(200).json({
@@ -62,7 +129,6 @@ router.post('/google', async (req, res) => {
 
 /**
  * @route   POST /api/auth/forgot-password
- * @desc    Send reset email
  */
 router.post('/forgot-password', async (req, res) => {
   const { email } = req.body;
@@ -98,7 +164,6 @@ router.post('/forgot-password', async (req, res) => {
 
 /**
  * @route   POST /api/auth/reset-password/:token
- * @desc    Reset user password
  */
 router.post('/reset-password/:token', async (req, res) => {
   const { token } = req.params;
