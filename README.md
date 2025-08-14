@@ -119,6 +119,9 @@ Infinite scroll / pagination in admin panel
 
 Analytics dashboard with D3.js or Chart.js
 
+VIDEO DEMO LINK.
+https://go.screenpal.com/watch/cTj23nn2opJ
+
 👨‍💻 Author
 David Joel – GitHub
 Feel free to fork, star, and follow my journey!
